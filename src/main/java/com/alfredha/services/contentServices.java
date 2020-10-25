@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import com.alfredha.services.Entity.Content;
@@ -40,5 +41,10 @@ public class contentServices {
 	public void delete(int id)
 	{
 		contentRepo.deleteById(id);
+	}
+	
+	public List<Content> getContentByTags(String tag)
+	{
+		return contentRepo.findContentWithTag(tag);
 	}
 }

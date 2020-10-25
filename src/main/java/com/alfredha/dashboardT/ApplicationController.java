@@ -24,24 +24,25 @@ public class ApplicationController {
 		System.out.println("REST controller Initiallized");
 	}
 	
-	@GetMapping("/")
-	private int basic()
+	@RequestMapping("/")
+	private String index()
 	{
-		System.out.println("enter");
-		return 0;
+		return "index";
 	}
 
-	@GetMapping("/content")
+	@GetMapping("/contents")
 	private List<Content> getAllContents()
 	{
 		System.out.println("Enter Get");
 		return contentServ.getAllContent();
 	}
 	
-	@GetMapping("/content-filter")
-	private List<Content> getContentWithFilter(@RequestBody String filter)
-	{
-		return contentServ.getContentByFilter(filter);
+	
+	@GetMapping("/get-tag")
+	private List<Content> getContentWithTag()
+	{	
+		System.out.println("The tags");
+		return contentServ.getContentByTags("Home");
 	}
 	
 	@PostMapping("/content")
