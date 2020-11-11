@@ -1,6 +1,7 @@
 package com.alfredha.services;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,11 +10,14 @@ import org.springframework.stereotype.Service;
 
 import com.alfredha.services.Entity.Content;
 import com.alfredha.services.repository.ContentRepository;
+import com.google.gson.Gson;
 
 @Service
 public class contentServices {
 	@Autowired
 	ContentRepository contentRepo;
+	
+	private Gson gson = new Gson();
 	
 	public List<Content> getAllContent()
 	{
@@ -43,8 +47,16 @@ public class contentServices {
 		contentRepo.deleteById(id);
 	}
 	
-	public List<Content> getContentByTags(String tag)
+	public List<Content> getContentByTags(String tagsJson)
 	{
-		return contentRepo.findContentWithTag(tag);
+		System.out.println(tagsJson);
+		String[] tags = gson.fromJson(tagsJson , String[].class);
+		
+		return contentRepo.findContentWithTag(Arrays.asList(tags));
+	}
+	
+	public List<String> getContensTags()
+	{
+		return contentRepo.getContentsTagList();
 	}
 }

@@ -17,22 +17,22 @@ public class Content {
 	private int contentId;
 	@Column
 	private String contentTitle;
-	@Column
+	@Column(length= 1500)
 	private String content;
 	@Column
 	private String contentTags;
 
 	@Override
 	public String toString() {
-		return "content [ontentId=" + contentId + ", contentTitle=" + contentTitle + ", content=" + content
+		return "content [contentId=" + contentId + ", contentTitle=" + contentTitle + ", content=" + content
 				+ ", contentTags=" + contentTags + "]";
 	}
 	
-	public int getOntentId() {
+	public int getContentId() {
 		return contentId;
 	}
-	public void setOntentId(int ontentId) {
-		this.contentId = ontentId;
+	public void setContentId(int contentId) {
+		this.contentId = contentId;
 	}
 	public String getContentTitle() {
 		return contentTitle;

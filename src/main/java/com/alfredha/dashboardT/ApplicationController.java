@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,7 +28,7 @@ public class ApplicationController {
 	@RequestMapping("/")
 	private String index()
 	{
-		return "index";
+		return "{}";
 	}
 
 	@GetMapping("/contents")
@@ -36,21 +37,26 @@ public class ApplicationController {
 		System.out.println("Enter Get");
 		return contentServ.getAllContent();
 	}
-	
-	
-	@GetMapping("/get-tag")
-	private List<Content> getContentWithTag()
+
+	@GetMapping("/get-tags")
+	private List<String> getTags()
 	{	
-		System.out.println("The tags");
-		return contentServ.getContentByTags("Home");
+		return contentServ.getContensTags();
 	}
 	
-	@PostMapping("/content")
+	
+	@PostMapping("/content-tags")
+	private List<Content> getContentWithTag(@RequestBody String jsonTag)
+	{	
+		return contentServ.getContentByTags(jsonTag);
+	}
+	
+	@PostMapping("/content-upload")
 	private int saveContent(@RequestBody Content content)
 	{
 		System.out.println("Enter post");
 		contentServ.saveOrUpate(content);
-		return content.getOntentId();
+		return content.getContentId();
 	}
 	
 	
